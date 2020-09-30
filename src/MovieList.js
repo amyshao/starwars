@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css"
 import { Link } from "react-router-dom";
-
+import {InfoTable} from "./InfoTable";
 
 class MovieList extends React.Component {
     constructor(props) {
@@ -12,10 +12,17 @@ class MovieList extends React.Component {
             items: [],
             type: props.type
         };
+        // bind method to class
+        this.fetchJson = this.fetchJson.bind(this);
     }
 
     componentDidMount() {
-        fetch("https://swapi.py4e.com/api/films/")
+        let http_link = "https://swapi.py4e.com/api/films/";
+        this.fetchJson(http_link);
+    }
+
+    fetchJson(link) {
+        fetch(link)
             .then(result => result.json()) // return json
             .then(
                 result => {
@@ -32,7 +39,6 @@ class MovieList extends React.Component {
                 }
             )
     }
-
 
     render() {
         const { error, isLoaded, items, type} = this.state;
@@ -54,7 +60,7 @@ class MovieList extends React.Component {
         } else {
             return ( // render a specific film's info
                 <div>
-                    {items[type].title}
+                    <InfoTable items={this.state.items[type]}/>
                     <Link className="Movie-link" to={"/"}>Return to Films</Link>
                 </div>
             );
