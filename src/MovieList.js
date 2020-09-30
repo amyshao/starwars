@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css"
 import { Link } from "react-router-dom";
-import { withRouter } from 'react-router-dom';
+
 
 class MovieList extends React.Component {
     constructor(props) {
@@ -52,7 +52,7 @@ class MovieList extends React.Component {
                 </div>
             );
         } else {
-            return (
+            return ( // render a specific film's info
                 <div>
                     {items[type].title}
                     <Link className="Movie-link" to={"/"}>Return to Films</Link>
@@ -62,5 +62,4 @@ class MovieList extends React.Component {
     }
 }
 
-//export default withRouter(connect(mapStateToProps))(MovieList));
 export default MovieList;
