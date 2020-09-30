@@ -35,6 +35,7 @@
   text-decoration: none;
   color: white;
   display: block;
+  margin: 2vh;
 }
 
 .Movie-link:hover {

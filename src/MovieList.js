@@ -55,6 +55,7 @@ class MovieList extends React.Component {
             return (
                 <div>
                     {items[type].title}
+                    <Link className="Movie-link" to={"/"}>Return to Films</Link>
                 </div>
             );
         }
