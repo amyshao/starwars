@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css"
 import { Link } from "react-router-dom";
-
+import { withRouter } from 'react-router-dom';
 
 class MovieList extends React.Component {
     constructor(props) {
@@ -46,7 +46,7 @@ class MovieList extends React.Component {
                 <div>
                     <ul>
                         {items.map((item, index) => (
-                            <Link className="Movie-link" to={"/" + (index + 1)}> {item.title} </Link>
+                            <Link className="Movie-link" to={"/" + index}> {item.title} </Link>
                         ))}
                     </ul>
                 </div>
@@ -61,4 +61,5 @@ class MovieList extends React.Component {
     }
 }
 
+//export default withRouter(connect(mapStateToProps))(MovieList));
 export default MovieList;
