@@ -39,23 +39,31 @@ body {
 
 
 .Body-Container {
-  margin: 15vh;
+  margin: 5vh;
   color: pink;
 }
 
-.Info-Table {
-  width: 50vh;
+.InfoTable {
+  width: 100vh;
 }
 
 .Table-col, .Table-col-title {
   text-align: left;
   padding-left: 5vh;
+  padding-top: 5px;
 }
 
 .Table-col {
   color: white;
+  width: 100%;
+  word-break: break-word;
 }
 
 .Table-row {
-  height: 5vh;
+  height: auto;
+}
+
+.InfoTable-container {
+  display: flex;
+  justify-content: center;
 }

@@ -3,22 +3,23 @@ import "./App.css"
 import { Link } from "react-router-dom";
 import {InfoTable} from "./InfoTable";
 
-class MovieList extends React.Component {
+
+class JsonData extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             error: null,
             isLoaded: false,
             items: [],
-            type: props.type
+            type: props.type,
+            http_link: props.http_link
         };
         // bind method to class
         this.fetchJson = this.fetchJson.bind(this);
     }
 
     componentDidMount() {
-        let http_link = "https://swapi.py4e.com/api/films/";
-        this.fetchJson(http_link);
+        this.fetchJson(this.state.http_link);
     }
 
     fetchJson(link) {
@@ -28,7 +29,8 @@ class MovieList extends React.Component {
                 result => {
                     this.setState({
                         isLoaded: true,
-                        items: result.results
+                        // get title fetch returns a single object
+                        items: (this.state.type === "getTitle") ? result : result.results
                     });
                 },
                 error => {
@@ -48,7 +50,7 @@ class MovieList extends React.Component {
             return <div>Loading...</div>;
         } else if (type === "home") {
             console.log(type);
-            return ( // render each film as a button
+            return ( // render each film as a link for router
                 <div>
                     <ul>
                         {items.map((item, index) => (
@@ -57,6 +59,10 @@ class MovieList extends React.Component {
                     </ul>
                 </div>
             );
+        } else if (type === "getTitle") {
+            return ( // only render title from given http link
+                <div>{items.name}</div>
+            )
         } else {
             return ( // render a specific film's info
                 <div>
@@ -68,4 +74,5 @@ class MovieList extends React.Component {
     }
 }
 
-export default MovieList;
+
+export default JsonData;
