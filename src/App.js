@@ -7,8 +7,8 @@ import Nav from "./Nav";
 
 function App() {
     // for http calls
-    let film_http = "https://swapi.py4e.com/api/films/";
-    let char_http = "https://swapi.py4e.com/api/people/";
+    let film_http = "https://swapi.py4e.com/api/films";
+    let char_http = "https://swapi.py4e.com/api/people";
     // for looping routes
     let movieCount = 7;
     let charCount = 10;

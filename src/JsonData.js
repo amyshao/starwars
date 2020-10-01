@@ -23,6 +23,7 @@ class JsonData extends React.Component {
         this.fetchJson(this.state.http_link);
     }
 
+    // load json from http call into items
     fetchJson(link) {
         console.log(link);
         fetch(link)
