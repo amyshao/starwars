@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { Switch, Route, BrowserRouter as Router} from "react-router-dom";
 import Nav from "./Nav";
-import LinkPage from "./LinkGroup";
+import LinkPage from "./LinkPage";
 import InfoPage from "./InfoPage";
 
 
@@ -26,7 +26,6 @@ function App() {
                   <div className="Body-Container">
                       <Switch>
                           <div>
-                              {/* route link page and info page for each of movie, character */}
                               {types.map((type) => (
                                   <div>
                                       {/* link page */}

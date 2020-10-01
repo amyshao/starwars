@@ -9,7 +9,7 @@ class InfoPage extends React.Component {
         super(props);
         this.state = {
             type: props.type,
-            page: props.page,
+            page: props.page
         }
     }
 
@@ -20,9 +20,9 @@ class InfoPage extends React.Component {
                 <JsonData type={type} page={page} key={type + page}/>
                 <Link className="Movie-link" to={'/' + type }>Return to {type}</Link>
             </div>
-
         );
     }
 }
+
 
 export default InfoPage;

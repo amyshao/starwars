@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css"
-import { Link } from "react-router-dom";
 import {InfoTable} from "./InfoTable";
+import {InfoList} from "./InfoList";
 
 
 // for http calls
@@ -16,8 +16,8 @@ class JsonData extends React.Component {
             error: null,
             isLoaded: false,
             items: [],
-            type: props.type,
-            page: props.page,
+            type: props.type, // movie or character
+            page: props.page, // either home (link list) or index of a movie/character item
             http_link: props.http_link || ((props.type === 'Movies') ? film_http : char_http)
         };
         // bind method to class
@@ -56,30 +56,13 @@ class JsonData extends React.Component {
         if (error) {
             return <div> Error: {error.message}</div>;
         } else if (!isLoaded) {
-            return <div>Loading...</div>;
-        } else if (page === 'home') { // render each film as a link for router
-            console.log(items);
-            return (
-                <div>
-                    <ul>
-                        {items.map((item, index) => (
-                            <Link className="Movie-link" to={'/' + type + '/' + index}>
-                                {item.title || item.name}
-                            </Link>
-                        ))}
-                    </ul>
-                </div>
-            );
+            return <div> Loading... </div>;
+        } else if (page === 'home') { // render list of links
+            return <div><InfoList items={items} type={type} sortOn={this.props.sortOn}/></div>
         } else if (type === "getTitle") { // only render title from given http link
-            return (
-                <div>{items.name}</div>
-            )
+            return <div> {items.name} </div>
         } else { // render a specific film's info as a table
-            return (
-                <div>
-                    <InfoTable items={this.state.items[page]}/>
-                </div>
-            );
+            return <div><InfoTable items={items[page]}/></div>
         }
     }
 }
