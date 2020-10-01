@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 const InfoList = (props) => {
     const {items, type, sortOn} = props;
 
-    // note links use the array index of the movie or character, do this before sorting
+    // note: links use the array index of the movie or character, do this before sorting
     let linkList = ( // get list of links
         <ul id={'linkList'}>
             {items.map((item, index) => (
