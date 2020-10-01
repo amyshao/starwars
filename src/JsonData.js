@@ -4,6 +4,11 @@ import { Link } from "react-router-dom";
 import {InfoTable} from "./InfoTable";
 
 
+// for http calls
+let film_http = "https://swapi.py4e.com/api/films";
+let char_http = "https://swapi.py4e.com/api/people";
+
+
 class JsonData extends React.Component {
     constructor(props) {
         super(props);
@@ -13,7 +18,7 @@ class JsonData extends React.Component {
             items: [],
             type: props.type,
             page: props.page,
-            http_link: props.http_link
+            http_link: props.http_link || ((props.type === 'Movies') ? film_http : char_http)
         };
         // bind method to class
         this.fetchJson = this.fetchJson.bind(this);
@@ -69,11 +74,10 @@ class JsonData extends React.Component {
             return (
                 <div>{items.name}</div>
             )
-        } else { // render a specific film's info
+        } else { // render a specific film's info as a table
             return (
                 <div>
                     <InfoTable items={this.state.items[page]}/>
-                    <Link className="Movie-link" to={'/' + type }>Return to {type}</Link>
                 </div>
             );
         }

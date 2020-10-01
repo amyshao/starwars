@@ -20,7 +20,7 @@ const ColItem = (props) => {
             </td>
         );
     } else if (name === 'homeworld') {
-        return ( // homeworld field is not an array
+        return ( // need to do this because homeworld field is not an array
             <td className={"Table-col"}>
                 <JsonData type={"getTitle"} http_link={value} key={name}/>
             </td>

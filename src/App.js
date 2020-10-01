@@ -1,19 +1,19 @@
 import React from 'react';
 import './App.css';
-import JsonData from "./JsonData";
-import { Switch, Route, BrowserRouter as Router, Link} from "react-router-dom";
+import { Switch, Route, BrowserRouter as Router} from "react-router-dom";
 import Nav from "./Nav";
+import LinkPage from "./LinkGroup";
+import InfoPage from "./InfoPage";
 
 
 function App() {
-    // for http calls
-    let film_http = "https://swapi.py4e.com/api/films";
-    let char_http = "https://swapi.py4e.com/api/people";
+
     // for looping routes
     let movieCount = 7;
     let charCount = 10;
-    let movieArray = [...Array(movieCount).keys()];
-    let charArray = [...Array(charCount).keys()];
+    let movie = { name: 'Movies', keyArray: [...Array(movieCount).keys()] }; // keyArray of [0,..,movieCount-1]
+    let character = { name: 'Characters', keyArray: [...Array(charCount).keys()] };
+    let types = [movie, character];
 
     return (
         <div className="App">
@@ -25,22 +25,23 @@ function App() {
 
                   <div className="Body-Container">
                       <Switch>
-                          <Route exact path="/Movies">
-                              <JsonData type={"Movies"} page={'home'} http_link={film_http} key={'Movies'}/>
-                          </Route>
-                          {movieArray.map((item, index) => (
-                              <Route exact path={"/Movies/" + index}>
-                                  <JsonData type={"Movies"} page={item} http_link={film_http} key={'Movies' + index}/>
-                              </Route>
-                          ))}
-                          <Route exact path="/Characters">
-                              <JsonData type={"Characters"} page={'home'} http_link={char_http} key={'Char'}/>
-                          </Route>
-                          {charArray.map((item, index) => (
-                              <Route exact path={"/Characters/" + index}>
-                                  <JsonData type={"Characters"} page={item} http_link={char_http} key={'Char' + index}/>
-                              </Route>
-                          ))}
+                          <div>
+                              {/* route link page and info page for each of movie, character */}
+                              {types.map((type) => (
+                                  <div>
+                                      {/* link page */}
+                                      <Route exact path={'/' + type.name}>
+                                          <LinkPage type={type.name} key={type.name}/>
+                                      </Route>
+                                      {/* info page for each movie or character */}
+                                      {type.keyArray.map((item, index) => (
+                                          <Route path={'/' + type.name + '/' + index}>
+                                              <InfoPage type={type.name} page={index} key={type.name + index}/>
+                                          </Route>
+                                      ))}
+                                  </div>
+                              ))}
+                          </div>
                       </Switch>
                   </div>
 
