@@ -43,6 +43,11 @@ body {
   color: pink;
 }
 
+.InfoTable-container {
+  display: flex;
+  justify-content: center;
+}
+
 .InfoTable {
   width: 100vh;
 }
@@ -63,7 +68,4 @@ body {
   height: auto;
 }
 
-.InfoTable-container {
-  display: flex;
-  justify-content: center;
-}
+

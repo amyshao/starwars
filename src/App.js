@@ -1,39 +1,52 @@
 import React from 'react';
 import './App.css';
-import JsonData from "./MovieList";
+import JsonData from "./JsonData";
 import { Switch, Route, BrowserRouter as Router, Link} from "react-router-dom";
 import Nav from "./Nav";
 
 
-//const Test = () => <h1>test</h1>
-
 function App() {
+    // for http calls
     let film_http = "https://swapi.py4e.com/api/films/";
-    let char_http = "https://swapi.py4e.com/api/characters/";
+    let char_http = "https://swapi.py4e.com/api/people/";
+    // for looping routes
+    let movieCount = 7;
+    let charCount = 10;
+    let movieArray = [...Array(movieCount).keys()];
+    let charArray = [...Array(charCount).keys()];
 
-  return (
-    <div className="App">
+    return (
+        <div className="App">
+              <Router>
 
-          <Router>
-              <header className="App-header">
-                <Nav />
-              </header>
-              <div className="Body-Container">
-                  <Switch>
-                      <Route exact path="/"> <JsonData type={"home"} http_link={film_http}/> </Route>
-                      <Route path="/0" render={props => <JsonData type={0} http_link={film_http}/>} />
-                      <Route path="/1" render={props => <JsonData type={1} http_link={film_http}/>} />
-                      <Route path="/2" render={props => <JsonData type={2} http_link={film_http}/>} />
-                      <Route path="/3" render={props => <JsonData type={3} http_link={film_http}/>} />
-                      <Route path="/4" render={props => <JsonData type={4} http_link={film_http}/>} />
-                      <Route path="/5" render={props => <JsonData type={5} http_link={film_http}/>} />
-                      <Route path="/6" render={props => <JsonData type={6} http_link={film_http}/>} />
-                  </Switch>
-              </div>
+                  <header className="App-header">
+                    <Nav />
+                  </header>
 
-          </Router>
-    </div>
-  );
+                  <div className="Body-Container">
+                      <Switch>
+                          <Route exact path="/Movies">
+                              <JsonData type={"Movies"} page={'home'} http_link={film_http} key={'Movies'}/>
+                          </Route>
+                          {movieArray.map((item, index) => (
+                              <Route exact path={"/Movies/" + index}>
+                                  <JsonData type={"Movies"} page={item} http_link={film_http} key={'Movies' + index}/>
+                              </Route>
+                          ))}
+                          <Route exact path="/Characters">
+                              <JsonData type={"Characters"} page={'home'} http_link={char_http} key={'Char'}/>
+                          </Route>
+                          {charArray.map((item, index) => (
+                              <Route exact path={"/Characters/" + index}>
+                                  <JsonData type={"Characters"} page={item} http_link={char_http} key={'Char' + index}/>
+                              </Route>
+                          ))}
+                      </Switch>
+                  </div>
+
+              </Router>
+        </div>
+    );
 }
 
 export default App;
